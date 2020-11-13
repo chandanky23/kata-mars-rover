@@ -81,6 +81,14 @@ const getNewCoordinates = (
       command === "F" ? ++x : --x
       break
   }
-  
-  return [x,y]
+
+  return calWRTEdgeOfMars([x, y], grid)
+}
+
+const calWRTEdgeOfMars = (coordinates: number[], grid: number[]): number[] => {
+  if (Math.pow(coordinates[1], 2) === Math.pow(grid[1], 2)) {
+    coordinates[1] = 0
+  }
+
+  return coordinates
 }
