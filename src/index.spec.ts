@@ -139,20 +139,15 @@ describe("Test for obstacles", () => {
   })
 })
 
-describe("Escape the obstaclec to reach destination", () => {
+describe("Escape the obstacles to reach destination", () => {
   it("Get the destination of the Rover", () => {
     const marsRover = new Rover([3,0], 'NORTH', [10,10], [[3,2],[4,3]])
     marsRover.setDestination([4,5])
     expect(marsRover.getDestination()).toEqual([4,5])
   })
-  it("Turn the rover to any other direction to avoid an obstacle", () => {
+  it("Throw error message if destination is empty to get the Command String", () => {
     const marsRover = new Rover([3,0], 'NORTH', [10,10], [[3,2],[4,3]])
-    marsRover.move('F')
-    marsRover.move('R')
-    marsRover.move('F')
-    marsRover.move('L')
-    marsRover.move('F')
-    marsRover.move('F')
-    expect(marsRover.turnTheRover()).toBeCalled()
+    marsRover.setDestination([])
+    expect(marsRover.getCommandStringToReachDestination()).toMatch('Destination cannot be empty')
   })
 })
