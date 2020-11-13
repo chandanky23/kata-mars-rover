@@ -52,3 +52,24 @@ describe("Rotation", () => {
     expect(marsRover.getDirection()).toEqual('NORTH')
   })
 })
+
+describe("Move the Rover", () => { 
+  it('Move the rover 1 unit Forward', () => {
+    const marsRover = new Rover([2,3], 'NORTH')
+    marsRover.move('F')
+    expect(marsRover.getCoordinates()).toEqual([2,4])
+  })
+  it('Move the rover 1 unit Forward and then 1 unit Backward', () => {
+    const marsRover = new Rover([2,3], 'NORTH')
+    marsRover.move('F')
+    expect(marsRover.getCoordinates()).toEqual([2,4])
+    marsRover.move('B')
+    expect(marsRover.getCoordinates()).toEqual([2,3])
+  })
+
+  it('does not move if the command string is any of "L" or "R"', () => {
+    const marsRover = new Rover([2,3], 'NORTH')
+    marsRover.move('L')
+    expect(marsRover.getCoordinates()).toEqual([2,3])
+  })
+})

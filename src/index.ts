@@ -22,25 +22,56 @@ class Rover {
   }
 
   move(command: Command) {
-    this.direction = getNewDirection(this.direction, command)
+    if (["F", "B"].includes(command)) {
+      this.coordinates = getNewCoordinates(
+        this.coordinates,
+        command,
+        this.direction
+      )
+    }
+    if (["R", "L"].includes(command)) {
+      this.direction = getNewDirection(this.direction, command)
+    }
   }
 }
 
 export default Rover
 
+const getNewDirection = (
+  initialDirection: Directions,
+  command: Command
+): Directions => {
+  switch (initialDirection) {
+    case "NORTH":
+      return command === "L" ? "WEST" : "EAST"
+    case "WEST":
+      return command === "L" ? "SOUTH" : "NORTH"
+    case "SOUTH":
+      return command === "L" ? "EAST" : "WEST"
+    case "EAST":
+      return command === "L" ? "NORTH" : "SOUTH"
+  }
+}
 
-const getNewDirection = (initialDirection: Directions, command: Command): Directions => {
-  if(['F','B'].includes(command)) {
-    return initialDirection
+const getNewCoordinates = (
+  initialCoordinates: number[],
+  command: Command,
+  direction: Directions
+): number[] => {
+  let [x,y] = initialCoordinates
+  switch (direction) {
+    case "NORTH":
+      command === "F" ? ++y : --y
+      break
+    case "WEST":
+      command === "F" ? --x : ++x
+      break
+    case "SOUTH":
+      command === "F" ? --y : ++y
+      break
+    case "EAST":
+      command === "F" ? ++x : --x
+      break
   }
-  switch(initialDirection) {
-    case 'NORTH':
-      return command === 'L' ? 'WEST' : 'EAST'
-    case 'WEST':
-      return command === 'L' ? 'SOUTH' : 'NORTH'
-    case 'SOUTH':
-      return command === 'L' ? 'EAST' : 'WEST'
-    case 'EAST':
-      return command === 'L' ? 'NORTH' : 'SOUTH'
-  }
+  return [x, y]
 }
