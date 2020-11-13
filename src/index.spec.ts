@@ -109,3 +109,10 @@ describe("Test the Rover at the end of a Grid", () => {
     expect(marsRover.getCoordinates()).toEqual([0,0])
   })
 })
+
+describe("Test for obstacles", () => {
+  it("List the known obstacles on Mars", () => {
+    const marsRover = new Rover([4,2], 'NORTH', [10,10], [[1,4], [3,5], [7,4]])
+    expect(marsRover.getObstacles()).toEqual([[1,4], [3,5], [7,4]])
+  })
+})
