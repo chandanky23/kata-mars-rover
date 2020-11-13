@@ -89,6 +89,9 @@ const calWRTEdgeOfMars = (coordinates: number[], grid: number[]): number[] => {
   if (Math.pow(coordinates[1], 2) === Math.pow(grid[1], 2)) {
     coordinates[1] = 0
   }
+  if (Math.pow(coordinates[0], 2) === Math.pow(grid[0], 2)) {
+    coordinates[0] = 0
+  }
 
   return coordinates
 }
