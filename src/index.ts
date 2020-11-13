@@ -78,6 +78,12 @@ class Rover {
       this.direction = getNewDirection(this.direction, command)
     }
   }
+
+  getCommandStringToReachDestination() {
+    if(!this.destination.length) {
+      return 'Destination cannot be empty'
+    }
+  }
 }
 
 export default Rover
