@@ -87,4 +87,9 @@ describe("Test the Rover at the end of a Grid", () => {
     const marsRover = new Rover([4,2], 'NORTH', [10,10])
     expect(marsRover.getGrid()).toEqual([10,10])
   })
+  it("Move the rover to 0 index in Y axis Mars", () => {
+    const marsRover = new Rover([4,9], 'NORTH', [10,10])
+    marsRover.move('F')
+    expect(marsRover.getCoordinates()).toEqual([4,0])
+  })
 })
