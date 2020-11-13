@@ -85,8 +85,10 @@ class Rover {
     }
 
     let route: string = ""
+    const jumpOverObstacle = "LFRFFRF"
 
     while (this.coordinates[0] !== this.destination[0]) {
+      console.log("here")
       if (["NORTH", "SOUTH"].includes(this.direction)) {
         if (this.coordinates[0] < this.destination[0]) {
           route += this.direction === "NORTH" ? "R" : "L"
@@ -96,11 +98,22 @@ class Rover {
           this.move(this.direction === "NORTH" ? "L" : "R")
         }
       }
-      route += "F"
       this.move("F")
+      // For every obstacle there will be a sequence LFRFFRFL,
+      // turn left and move 1 unit forward, turn right and move 2 units forward, turn right and move 1 unit forward
+      // Finally turn Left to return back to trajectory
+      if (this.roverStatus === ROVER_STATUS.STOPPED) {
+        for (let i = 0; i < jumpOverObstacle.length; i++) {
+          this.move(jumpOverObstacle[i] as Command)
+          route += jumpOverObstacle[i]
+        }
+      } else {
+        route += "F"
+      }
     }
 
     while (this.coordinates[1] !== this.destination[1]) {
+      console.log("in here")
       if (["EAST", "WEST"].includes(this.direction)) {
         if (this.coordinates[1] < this.destination[1]) {
           route += this.direction === "EAST" ? "L" : "R"
@@ -110,8 +123,18 @@ class Rover {
           this.move(this.direction === "EAST" ? "R" : "L")
         }
       }
-      route += "F"
       this.move("F")
+      // For every obstacle there will be a sequence LFRFFRFL,
+      // turn left and move 1 unit forward, turn right and move 2 units forward, turn right and move 1 unit forward
+      // Finally turn Left to return back to trajectory
+      if (this.roverStatus === ROVER_STATUS.STOPPED) {
+        for (let i = 0; i < jumpOverObstacle.length; i++) {
+          this.move(jumpOverObstacle[i] as Command)
+          route += jumpOverObstacle[i]
+        }
+      } else {
+        route += "F"
+      }
     }
 
     return route
