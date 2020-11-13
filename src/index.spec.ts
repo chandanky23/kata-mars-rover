@@ -115,4 +115,13 @@ describe("Test for obstacles", () => {
     const marsRover = new Rover([4,2], 'NORTH', [10,10], [[1,4], [3,5], [7,4]])
     expect(marsRover.getObstacles()).toEqual([[1,4], [3,5], [7,4]])
   })
+
+  it("Report status as MOVING if no obstacles met", () => {
+    const marsRover = new Rover([4,2], 'NORTH', [10,10], [])
+    marsRover.move('F')
+    marsRover.move('L')
+    marsRover.move('F')
+    marsRover.move('B')
+    expect(marsRover.getRoverStatus()).toEqual('MOVING')
+  })
 })
