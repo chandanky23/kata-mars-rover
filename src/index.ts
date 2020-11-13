@@ -4,11 +4,13 @@ class Rover {
   coordinates: number[]
   direction: Directions
   grid: number[]
+  obstacles: number[][]
 
-  constructor(coordinates: number[], direction: Directions, grid: number[]) {
+  constructor(coordinates: number[], direction: Directions, grid: number[], obstacles: number[][]) {
     this.coordinates = coordinates
     this.direction = direction
     this.grid = grid
+    this.obstacles = obstacles
   }
 
   getCoordinates() {
@@ -21,6 +23,10 @@ class Rover {
 
   getGrid() {
     return this.grid
+  }
+
+  getObstacles() {
+    return this.obstacles
   }
 
   validateCommand(command: string) {
