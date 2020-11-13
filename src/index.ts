@@ -3,10 +3,12 @@ export type Command = "L" | "R" | "B" | "F"
 class Rover {
   coordinates: number[]
   direction: Directions
+  grid: number[]
 
-  constructor(coordinates: number[], direction: Directions) {
+  constructor(coordinates: number[], direction: Directions, grid: number[]) {
     this.coordinates = coordinates
     this.direction = direction
+    this.grid = grid
   }
 
   getCoordinates() {
@@ -15,6 +17,10 @@ class Rover {
 
   getDirection() {
     return this.direction
+  }
+
+  getGrid() {
+    return this.grid
   }
 
   validateCommand(command: string) {
@@ -26,7 +32,8 @@ class Rover {
       this.coordinates = getNewCoordinates(
         this.coordinates,
         command,
-        this.direction
+        this.direction,
+        this.grid
       )
     }
     if (["R", "L"].includes(command)) {
@@ -56,9 +63,10 @@ const getNewDirection = (
 const getNewCoordinates = (
   initialCoordinates: number[],
   command: Command,
-  direction: Directions
+  direction: Directions,
+  grid: number[]
 ): number[] => {
-  let [x,y] = initialCoordinates
+  let [x, y] = initialCoordinates
   switch (direction) {
     case "NORTH":
       command === "F" ? ++y : --y
@@ -73,5 +81,6 @@ const getNewCoordinates = (
       command === "F" ? ++x : --x
       break
   }
-  return [x, y]
+  
+  return [x,y]
 }
