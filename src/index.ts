@@ -1,16 +1,24 @@
 type Directions = "NORTH" | "SOUTH" | "EAST" | "WEST"
 export type Command = "L" | "R" | "B" | "F"
+
+enum ROVER_STATUS {
+  MOVING = 'MOVING',
+  STOPPED = 'STOPPED'
+}
+
 class Rover {
   coordinates: number[]
   direction: Directions
   grid: number[]
   obstacles: number[][]
+  roverStatus: ROVER_STATUS
 
   constructor(coordinates: number[], direction: Directions, grid: number[], obstacles: number[][]) {
     this.coordinates = coordinates
     this.direction = direction
     this.grid = grid
     this.obstacles = obstacles
+    this.roverStatus = ROVER_STATUS.MOVING
   }
 
   getCoordinates() {
@@ -27,6 +35,10 @@ class Rover {
 
   getObstacles() {
     return this.obstacles
+  }
+
+  getRoverStatus() {
+    return this.roverStatus
   }
 
   validateCommand(command: string) {
