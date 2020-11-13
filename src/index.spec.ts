@@ -138,3 +138,11 @@ describe("Test for obstacles", () => {
     expect(marsRover.getDirection()).toEqual('NORTH')
   })
 })
+
+describe("Escape the obstaclec to reach destination", () => {
+  it("Get the destination of the Rover", () => {
+    const marsRover = new Rover([3,0], 'NORTH', [10,10], [[3,2],[4,3]])
+    marsRover.setDestination([4,5])
+    expect(marsRover.getDestination()).toEqual([4,5])
+  })
+})
