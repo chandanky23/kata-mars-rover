@@ -2,8 +2,8 @@ type Directions = "NORTH" | "SOUTH" | "EAST" | "WEST"
 export type Command = "L" | "R" | "B" | "F"
 
 enum ROVER_STATUS {
-  MOVING = 'MOVING',
-  STOPPED = 'STOPPED'
+  MOVING = "MOVING",
+  STOPPED = "STOPPED",
 }
 
 class Rover {
@@ -13,7 +13,12 @@ class Rover {
   obstacles: number[][]
   roverStatus: ROVER_STATUS
 
-  constructor(coordinates: number[], direction: Directions, grid: number[], obstacles: number[][]) {
+  constructor(
+    coordinates: number[],
+    direction: Directions,
+    grid: number[],
+    obstacles: number[][]
+  ) {
     this.coordinates = coordinates
     this.direction = direction
     this.grid = grid
@@ -47,12 +52,17 @@ class Rover {
 
   move(command: Command) {
     if (["F", "B"].includes(command)) {
-      this.coordinates = getNewCoordinates(
+      const updatedCoordinates = getNewCoordinates(
         this.coordinates,
         command,
         this.direction,
         this.grid
       )
+      if (checkIfAnObstacle(updatedCoordinates, this.obstacles)) {
+        this.roverStatus = ROVER_STATUS.STOPPED
+      } else {
+        this.coordinates = updatedCoordinates
+      }
     }
     if (["R", "L"].includes(command)) {
       this.direction = getNewDirection(this.direction, command)
@@ -112,4 +122,16 @@ const calWRTEdgeOfMars = (coordinates: number[], grid: number[]): number[] => {
   }
 
   return coordinates
+}
+
+const checkIfAnObstacle = (
+  coordinates: number[],
+  obstacles: number[][]
+): boolean => {
+  for(let i=0; i<obstacles.length; i++) {
+    if(coordinates.toString() === obstacles[i].toString()) {
+      return true
+    }
+  }
+  return false
 }
