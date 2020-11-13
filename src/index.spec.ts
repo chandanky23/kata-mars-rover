@@ -124,4 +124,10 @@ describe("Test for obstacles", () => {
     marsRover.move('B')
     expect(marsRover.getRoverStatus()).toEqual('MOVING')
   })
+
+  it("Rover meets an obstacle, and stops", () => {
+    const marsRover = new Rover([4,2], 'NORTH', [10,10], [[4,3]])
+    marsRover.move('F')
+    expect(marsRover.getRoverStatus()).toEqual('STOPPED')
+  })
 })
