@@ -80,9 +80,41 @@ class Rover {
   }
 
   getCommandStringToReachDestination() {
-    if(!this.destination.length) {
-      return 'Destination cannot be empty'
+    if (!this.destination.length) {
+      return "Destination cannot be empty"
     }
+
+    let route: string = ""
+
+    while (this.coordinates[0] !== this.destination[0]) {
+      if (["NORTH", "SOUTH"].includes(this.direction)) {
+        if (this.coordinates[0] < this.destination[0]) {
+          route += this.direction === "NORTH" ? "R" : "L"
+          this.move(this.direction === "NORTH" ? "R" : "L")
+        } else if (this.coordinates[0] > this.destination[0]) {
+          route += this.direction === "NORTH" ? "L" : "R"
+          this.move(this.direction === "NORTH" ? "L" : "R")
+        }
+      }
+      route += "F"
+      this.move("F")
+    }
+
+    while (this.coordinates[1] !== this.destination[1]) {
+      if (["EAST", "WEST"].includes(this.direction)) {
+        if (this.coordinates[1] < this.destination[1]) {
+          route += this.direction === "EAST" ? "L" : "R"
+          this.move(this.direction === "EAST" ? "L" : "R")
+        } else if (this.coordinates[1] > this.destination[1]) {
+          route += this.direction === "EAST" ? "R" : "L"
+          this.move(this.direction === "EAST" ? "R" : "L")
+        }
+      }
+      route += "F"
+      this.move("F")
+    }
+
+    return route
   }
 }
 
@@ -144,8 +176,8 @@ const checkIfAnObstacle = (
   coordinates: number[],
   obstacles: number[][]
 ): boolean => {
-  for(let i=0; i<obstacles.length; i++) {
-    if(coordinates.toString() === obstacles[i].toString()) {
+  for (let i = 0; i < obstacles.length; i++) {
+    if (coordinates.toString() === obstacles[i].toString()) {
       return true
     }
   }
