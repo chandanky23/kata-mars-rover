@@ -125,9 +125,16 @@ describe("Test for obstacles", () => {
     expect(marsRover.getRoverStatus()).toEqual('MOVING')
   })
 
-  it("Rover meets an obstacle, and stops", () => {
-    const marsRover = new Rover([4,2], 'NORTH', [10,10], [[4,3]])
+  it("Rover meets an obstacle, stops at previous position and reports", () => {
+    const marsRover = new Rover([3,0], 'NORTH', [10,10], [[3,2],[4,3]])
+    marsRover.move('F')
+    marsRover.move('R')
+    marsRover.move('F')
+    marsRover.move('L')
+    marsRover.move('F')
     marsRover.move('F')
     expect(marsRover.getRoverStatus()).toEqual('STOPPED')
+    expect(marsRover.getCoordinates()).toEqual([4,2])
+    expect(marsRover.getDirection()).toEqual('NORTH')
   })
 })
