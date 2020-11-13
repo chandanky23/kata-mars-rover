@@ -12,6 +12,7 @@ class Rover {
   grid: number[]
   obstacles: number[][]
   roverStatus: ROVER_STATUS
+  destination: number[]
 
   constructor(
     coordinates: number[],
@@ -24,6 +25,15 @@ class Rover {
     this.grid = grid
     this.obstacles = obstacles
     this.roverStatus = ROVER_STATUS.MOVING
+    this.destination = []
+  }
+
+  setDestination(destination: number[]) {
+    this.destination = destination
+  }
+
+  getDestination() {
+    return this.destination
   }
 
   getCoordinates() {
