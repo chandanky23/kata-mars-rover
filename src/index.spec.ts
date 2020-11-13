@@ -1,4 +1,4 @@
-import Rover from './index'
+import Rover, { Command } from './index'
 
 describe("Initialise the Rover with [2,3] and direction 'NORTH'", () => {
   const marsRover = new Rover([2,3], 'NORTH') 
@@ -66,10 +66,18 @@ describe("Move the Rover", () => {
     marsRover.move('B')
     expect(marsRover.getCoordinates()).toEqual([2,3])
   })
-
   it('does not move if the command string is any of "L" or "R"', () => {
     const marsRover = new Rover([2,3], 'NORTH')
     marsRover.move('L')
     expect(marsRover.getCoordinates()).toEqual([2,3])
+  })
+  it('Test the rover with a command string "FLFFFRFLB"', () => {
+    const marsRover = new Rover([4,2], 'EAST')
+    const command = 'FLFFFRFLB'
+    for(let i=0; i < command.length; i++) {
+      marsRover.move(command[i] as Command)
+    }
+    expect(marsRover.getCoordinates()).toEqual([6,4])
+    expect(marsRover.getDirection()).toEqual('NORTH')
   })
 })

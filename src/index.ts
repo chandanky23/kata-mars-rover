@@ -1,5 +1,5 @@
 type Directions = "NORTH" | "SOUTH" | "EAST" | "WEST"
-type Command = "L" | "R" | "B" | "F"
+export type Command = "L" | "R" | "B" | "F"
 class Rover {
   coordinates: number[]
   direction: Directions
