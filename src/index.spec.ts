@@ -156,4 +156,10 @@ describe("Escape the obstacles to reach destination", () => {
     marsRover.setDestination([4, 3])
     expect(marsRover.getCommandStringToReachDestination()).toEqual('RFLFFF')
   })
+
+  it("Get a command string to reach a destination when there is one obstacle", () => {
+    const marsRover = new Rover([3,0], 'NORTH', [10,10], [[3,2]])
+    marsRover.setDestination([3, 3])
+    expect(marsRover.getCommandStringToReachDestination()).toEqual('RFLFFF')
+  })
 })
